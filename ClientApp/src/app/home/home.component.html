@@ -1,0 +1,51 @@
+<div>
+  <label style="margin:5px">Description</label>
+  <input [(ngModel)]="Upimage.imagesDescription" name="imagesDescription" id="Text1" type="text" />
+</div>
+
+<div>
+  <input id="Checkbox1" name="featured" [(ngModel)]="Upimage.featured" type="checkbox" />
+  <label style="margin:5px" for="Checkbox1">Featured</label><br />
+</div>
+<div class="row" style="margin-bottom:15px;">
+  <div class="col-md-3">
+    <input type="file" #file placeholder="Choose file" (change)="setFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+  </div>
+  <div class="col-md-4">
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+
+  <div class="row">
+    <div class="offset-md-4 col-md-2">
+      <button type="button" class="btn btn-primary" (click)="uploadFile()">Create </button>
+    </div>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Description</th>
+        <th scope="col">Image Path</th>
+        <th scope="col">Featured</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let image of images">
+        <td><img [src]="createImgPath(image.imagesPath)" alt="{{image.imagesPath}}" style="width:60px; height:60px;"></td>
+        <td>{{image.imagesDescription}}</td>
+        <td>{{image.imagesPath}}</td>
+        <td>{{image.featured}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="deleteGalleryPhoto(image.imagesId)">Delete </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
